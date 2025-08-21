@@ -1,5 +1,15 @@
-# Tektopia Addons Mod
+# TektopiaPlus
 
-This is the repository for the Tektopia Addons Mod
+A major fork, rework, and expansion of the [TektopiaAddons](https://github.com/Sushiy/TektopiaAddons) Minecraft mod.
 
-Feel free to reuse, modify or add whatever you want! Let me know with a pull request if you have made some cool changes!
+## 📖 About
+TektopiaPlus is a rework of the original TektopiaAddons mod, featuring:  
+- Bugfixes
+- Compatibility-Testing with third-party Mods
+
+This project is a fork of the original **TektopiaAddons** mod by [Sushiy](https://github.com/Sushiy).  
+
+👉 Current fork: [TektopiaPlus Repository](https://github.com/qode4you/TektopiaPlus)
+
+## ⚖️ License
+This project is licensed under the **MIT License**.  
