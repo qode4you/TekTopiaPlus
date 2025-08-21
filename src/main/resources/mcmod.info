@@ -1,13 +1,13 @@
 [
 	{
-		"modid": "tektopiaaddons",
-		"name": "Tektopia Addons",
-		"description": "Tektopia Addons using a template for 1.12.2, using ForgeGradle 5.1.",
-		"version": "${version}",
+		"modid": "tektopiaplus",
+		"name": "TekTopiaPlus",
+		"description": "TekTopiaPlus is a fork of Tektopia Addons which includes bug fixes",
+		"version": "1.0.0",
 		"mcversion": "1.12.2",
 		"url": "",
 		"updateUrl": "",
-		"authorList": ["Sushiy"],
+		"authorList": ["Sushiy", "Qode"],
 		"credits": "",
 		"logoFile": "",
 		"screenshots": [],
