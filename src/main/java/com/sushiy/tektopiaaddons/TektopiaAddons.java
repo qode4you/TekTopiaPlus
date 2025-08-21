@@ -7,6 +7,7 @@ import com.leviathanstudio.craftstudio.client.util.EnumResourceType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockOre;
+import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
@@ -29,7 +30,7 @@ import java.util.*;
 public class TektopiaAddons {
 	public static final String MODID = "tektopiaaddons";
 	public static final String NAME = "Tekotpia Addons";
-	public static final String VERSION = "1.4.4";
+	public static final String VERSION = "1.5.1";
 	
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 
@@ -120,13 +121,15 @@ public class TektopiaAddons {
 				LOGGER.info(MODID + " Config food item " + split[0] + "does not exist");
 			}
 		}
+        OreDictionary.registerOre("cropBeetroot", Items.BEETROOT);
 
 		Random rand = new Random();
         for(Item item : items)
 		{
 			ItemStack stack = new ItemStack(item);
 			if(stack.isEmpty()) continue;
-			if(Arrays.stream(OreDictionary.getOreIDs(stack)).anyMatch(x -> OreDictionary.getOreName(x).startsWith("crop")))
+            if(Arrays.stream(OreDictionary.getOreIDs(stack)).anyMatch(x -> OreDictionary.getOreName(x).startsWith("crop"))
+                    ||  Arrays.stream(OreDictionary.getOreIDs(stack)).anyMatch(y -> OreDictionary.getOreName(y).equals("sugarcane")))
 			{
 				cropItems.add(item);
 				//LOGGER.info("Found Crop: " + item.getRegistryName());
