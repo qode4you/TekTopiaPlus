@@ -35,6 +35,11 @@ This project is a fork of **[TektopiaAddons](https://github.com/Sushiy/TektopiaA
 
 ## ⚠️ Current Issues
 
+- Miner does not farm ores that are not directly in front of them
+- Ore-Respawn through Druids is broken for modded ores; they do not respawn in mine shafts as intended
+- Planned support for Thermal Foundation ores needs to be implemented
+- A system to allow manual addition of ores from other mods via config is required
+- Ensuring all magical ores from other mods are correctly identified and collected
 - Miner does not use third-party mod tools
 - Lumberjack does not use third-party mod tools
 
