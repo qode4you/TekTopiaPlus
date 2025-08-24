@@ -27,7 +27,7 @@ This project is a fork of **[TektopiaAddons](https://github.com/Sushiy/TektopiaA
 
 ## ✨ New Features
 
-- Villager stone resource usage *(coming soon)*
+- Villager stone resource usage
 - Enhanced compatibility with third-party food mods via reworked food registration logic
 - Refactored and cleaned open-source code (removed unnecessary files) *(50% done)*
 
