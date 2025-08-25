@@ -17,8 +17,6 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(value = EntityAIMining.class)
 public abstract class EntityAIMiningMixin extends EntityAIMoveToBlock {
@@ -33,15 +31,19 @@ public abstract class EntityAIMiningMixin extends EntityAIMoveToBlock {
     private void tryBonusOre(EntityVillagerTek villager){}
     @Shadow(remap = false)
     private ItemStack toolUsed = null;
+
     /**
      * @author
-     * @reason
+     * @reason Make ore detection compatible with modded ores
      */
     @Overwrite(remap = false)
     private void mineBlock(BlockPos minePos, int skillChance) {
         int skill = this.villager.getSkill(ProfessionType.MINER);
         boolean dropStone = ConfigHandler.VILLAGER_STONE_SUPPORT_ENABLE && this.villager.isAIFilterEnabled("mining.stone") && stoneDropCheck(skill);
-        boolean dropBlock = VillageStructureMineshaft.isOre(this.villager.world, minePos) || dropStone;
+
+        // Use TektopiaAddons.isOreBlock instead of VillageStructureMineshaft.isOre for mod compatibility
+        boolean dropBlock = isOreBlock(this.villager.world.getBlockState(minePos).getBlock()) || dropStone;
+
         if (this.villager.world.getBlockState(minePos).getBlock() == Blocks.STONE && !dropStone) {
             this.tryBonusOre(this.villager);
         }
@@ -59,5 +61,13 @@ public abstract class EntityAIMiningMixin extends EntityAIMoveToBlock {
 
     private boolean stoneDropCheck(int skill) {
         return this.villager.getRNG().nextInt(5) == 0;
+    }
+
+    /**
+     * Check if a block is an ore, including modded ores
+     */
+    private boolean isOreBlock(net.minecraft.block.Block block) {
+        // Use our custom ore detection system that includes modded ores
+        return TektopiaAddons.isOreBlock(block);
     }
 }

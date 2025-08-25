@@ -22,6 +22,7 @@ This project is a fork of **[TektopiaAddons](https://github.com/Sushiy/TektopiaA
 - Fixed miner coal collection and proper AI filter registration
 - Corrected farmer behavior with beetroot and sugar cane harvesting
 - Improved compatibility with third-party food mods (e.g. *Pam's HarvestCraft*)
+- Fixed an issue where modded ores had an inconsistent drop rate when mined - They now drop reliably, consistent with vanilla ores
 
 ---
 
@@ -35,9 +36,8 @@ This project is a fork of **[TektopiaAddons](https://github.com/Sushiy/TektopiaA
 
 ## ⚠️ Current Issues
 
-- Miner does not farm ores that are not directly in front of them
+- Miner does not farm third-party mod ores that are not directly in front of them
 - Ore-Respawn through Druids is broken for modded ores; they do not respawn in mine shafts as intended
-- Planned support for Thermal Foundation ores needs to be implemented
 - A system to allow manual addition of ores from other mods via config is required
 - Ensuring all magical ores from other mods are correctly identified and collected
 - Miner does not use third-party mod tools
@@ -50,9 +50,10 @@ This project is a fork of **[TektopiaAddons](https://github.com/Sushiy/TektopiaA
 ## 🔗 Tested Compatibility
 
 - **TekTopia** – Version 1.1.0
-- **MixinBooter** – Version 10.6
 - **Pam's HarvestCraft** – Version 1.12.2zg
 - **Aquaculture** – Version 1.6.8
+- **Thermal Foundation** – Version 2.6.7.1
+- **TinkersAntique** _(Only Ores)_ – Version 2.13.0.202
 
 ---
 
