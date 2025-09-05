@@ -50,6 +50,10 @@ This project is a fork of **[TektopiaAddons](https://github.com/Sushiy/TektopiaA
 ## 🔗 Tested Compatibility
 
 - **TekTopia** – Version 1.1.0
+- **TekTopiaTrader** – Version 1.4.0
+- **TekTopiaThief** – Version 1.3.0
+- **TekTopiaRecycler** – Version 1.3.0
+- **TekTopiaTinker** – Version 1.4.0
 - **Pam's HarvestCraft** – Version 1.12.2zg
 - **Aquaculture** – Version 1.6.8
 - **Thermal Foundation** – Version 2.6.7.1
