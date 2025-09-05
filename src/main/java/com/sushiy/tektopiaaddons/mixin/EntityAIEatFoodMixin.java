@@ -9,6 +9,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.oredict.OreDictionary;
 import net.tangotek.tektopia.entities.EntityVillagerTek;
 import net.tangotek.tektopia.entities.ai.EntityAIEatFood;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +18,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Arrays;
 import java.util.Set;
@@ -61,7 +61,7 @@ public abstract class EntityAIEatFoodMixin {
         ITEM_BLACKLIST.add(":hammer");
     }
 
-    // First, capture the original returnBowl consumer from Tektopia's static block
+    // Capture the original returnBowl consumer from Tektopia's static block
     @Inject(method = "<clinit>", at = @At(value = "FIELD", target = "Lnet/tangotek/tektopia/entities/ai/EntityAIEatFood;returnBowl:Ljava/util/function/BiConsumer;", shift = At.Shift.AFTER), remap = false)
     private static void captureReturnBowl(CallbackInfo ci) {
         try {
@@ -86,7 +86,7 @@ public abstract class EntityAIEatFoodMixin {
     private static void registerModdedFoods(CallbackInfo ci) {
         TektopiaAddons.LOGGER.info("Starting modded food registration for Tektopia...");
 
-        // First, preserve Tektopia's original food registration by keeping the old logic
+        // Preserve Tektopia's original food registration by keeping the old logic
         preserveOriginalRegistration();
 
         int registeredCount = 0;
@@ -260,20 +260,16 @@ public abstract class EntityAIEatFoodMixin {
 
         ItemStack testStack = new ItemStack(item);
 
-        // Method 1: Reflection check - but only if it's not a weapon
-        try {
-            Method getHealAmount = item.getClass().getMethod("getHealAmount", ItemStack.class);
-            float healAmount = (Float) getHealAmount.invoke(item, testStack);
-            if (healAmount > 0) {
-                // Additional check: if it has durability, it's probably not food
-                if (item.isDamageable()) {
-                    TektopiaAddons.LOGGER.debug("Skipping durable item that returns heal amount: {}", itemId);
-                    return false;
-                }
+        // Safer approach: check for food-related OreDictionary tags instead of reflection
+        int[] oreIDs = OreDictionary.getOreIDs(testStack);
+        for (int id : oreIDs) {
+            String oreName = OreDictionary.getOreName(id);
+            if (oreName.startsWith("food") || oreName.startsWith("listAllfood") ||
+                    oreName.contains("fruit") || oreName.contains("vegetable") ||
+                    oreName.contains("meat") || oreName.contains("fish") ||
+                    oreName.contains("crop") || oreName.contains("seed")) {
                 return true;
             }
-        } catch (Exception e) {
-            // Continue
         }
 
         // Method 2: Name pattern check with better filtering
@@ -293,7 +289,9 @@ public abstract class EntityAIEatFoodMixin {
             if (name.contains("food") || name.contains("meal") || name.contains("dish") ||
                     name.contains("soup") || name.contains("stew") ||
                     name.contains("cake") || name.contains("bread") || name.contains("fruit") ||
-                    name.contains("vegetable") || name.contains("meat") || name.contains("fish")) {
+                    name.contains("vegetable") || name.contains("meat") || name.contains("fish") ||
+                    name.contains("poultry") || name.contains("cheese") || name.contains("milk") ||
+                    name.contains("egg") || name.contains("spice") || name.contains("herb")) {
                 return true;
             }
 
@@ -348,17 +346,8 @@ public abstract class EntityAIEatFoodMixin {
             if (item instanceof ItemFood) {
                 baseHunger = ((ItemFood) item).getHealAmount(stack);
             } else {
-                try {
-                    Method getHealAmount = item.getClass().getMethod("getHealAmount", ItemStack.class);
-                    baseHunger = (Float) getHealAmount.invoke(item, stack);
-                } catch (Exception e) {
-                    try {
-                        Method getFoodLevel = item.getClass().getMethod("getFoodLevel", ItemStack.class);
-                        baseHunger = (Integer) getFoodLevel.invoke(item, stack);
-                    } catch (Exception ex) {
-                        baseHunger = 4;
-                    }
-                }
+                // Use default values for non-ItemFood items instead of reflection
+                baseHunger = 4;
             }
 
             float hunger = baseHunger * 0.5f;
@@ -372,30 +361,17 @@ public abstract class EntityAIEatFoodMixin {
 
     private static int calculateHappinessValue(Item item, ItemStack stack) {
         try {
-            float saturation = 0;
-            float healAmount = 0;
+            float saturation = 0.6f;
+            float healAmount = 4;
 
             if (item instanceof ItemFood) {
                 ItemFood food = (ItemFood) item;
                 healAmount = food.getHealAmount(stack);
                 saturation = food.getSaturationModifier(stack);
             } else {
-                try {
-                    Method getHealAmount = item.getClass().getMethod("getHealAmount", ItemStack.class);
-                    Method getSaturation = item.getClass().getMethod("getSaturationModifier", ItemStack.class);
-                    healAmount = (Float) getHealAmount.invoke(item, stack);
-                    saturation = (Float) getSaturation.invoke(item, stack);
-                } catch (Exception e) {
-                    try {
-                        Method getFoodLevel = item.getClass().getMethod("getFoodLevel", ItemStack.class);
-                        Method getSaturationLevel = item.getClass().getMethod("getSaturation", ItemStack.class);
-                        healAmount = (Integer) getFoodLevel.invoke(item, stack);
-                        saturation = (Float) getSaturationLevel.invoke(item, stack);
-                    } catch (Exception ex) {
-                        healAmount = 4;
-                        saturation = 0.6f;
-                    }
-                }
+                // Use default values for non-ItemFood items instead of reflection
+                healAmount = 4;
+                saturation = 0.6f;
             }
 
             float happy = healAmount * 0.5f * saturation;
