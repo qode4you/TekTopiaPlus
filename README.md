@@ -29,8 +29,9 @@ This project is a fork of **[TektopiaAddons](https://github.com/Sushiy/TektopiaA
 ## ✨ New Features
 
 - Villager stone resource usage
-- Enhanced compatibility with third-party food mods via reworked food registration logic
-- Refactored and cleaned open-source code (removed unnecessary files) *(50% done)*
+- Monster hostility behavior is now configurable, with a hardcore mode option for total survival
+- Added enhanced compatibility for third-party food mods via reworked registration logic
+- Refactored and cleaned the open-source codebase for improved performance and stability (50% done)
 
 ---
 

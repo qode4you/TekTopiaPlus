@@ -30,7 +30,7 @@ import java.util.*;
 public class TektopiaAddons {
     public static final String MODID = "tektopiaplus";
     public static final String NAME = "TekTopiaPlus";
-    public static final String VERSION = "1.0.21";
+    public static final String VERSION = "1.0.22";
 
     public static final Logger LOGGER = LogManager.getLogger(MODID);
 
@@ -40,6 +40,8 @@ public class TektopiaAddons {
     public static HashSet<Item> cropItems;
     public static HashSet<BlockCrops> cropBlocks;
     public static HashSet<ItemFood> standardFoodItems;
+
+    public static HashSet<String> ignoredMonsters = new HashSet<>();  // Move Monster Hostility Behavior to Village Hardcore Mode Config
 
     public static class FoodStats
     {
@@ -283,6 +285,15 @@ public class TektopiaAddons {
         {
             String Version = FMLCommonHandler.instance().findContainerFor("magistuarmory").getVersion();
             TektopiaAddons.LOGGER.info("magistuarmory " + Version + " detected");
+        }
+
+        // Initialize ignored monsters - Move Monster Hostility Behavior to Village Hardcore Mode Config
+        ignoredMonsters = new HashSet<>();
+
+        // Add monsters from config to ignored list - Move Monster Hostility Behavior to Village Hardcore Mode Config
+        for(String monsterName : ConfigHandler.IGNORED_MONSTERS) {
+            ignoredMonsters.add(monsterName);
+            LOGGER.info("Added to ignored monsters: " + monsterName);
         }
     }
 
