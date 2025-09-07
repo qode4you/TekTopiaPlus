@@ -48,9 +48,9 @@ public class ConfigHandler {
         VILLAGE_HARDCORE_MODE_ENABLED = config.getBoolean("Enable Village Hardcore Mode", category, false, "More types of monsters will attack villagers");
         VILLAGER_STONE_SUPPORT_ENABLE = config.getBoolean("Enable villager stone support", category, false, "Allow villagers to obtain and use stone resources and tools");
 
-        // Add this line for ignored monsters
+        // Ignored monsters
         IGNORED_MONSTERS = config.getStringList("Ignored Monsters", category, IGNORED_MONSTERS_DEFAULT,
-                "List of monster names that villagers should flee from but not attack (e.g., 'Creeper', 'Enderman')");
+                "Monster ignore list: villagers treat these monsters as friendly.");
 
 
         category = "Food";
