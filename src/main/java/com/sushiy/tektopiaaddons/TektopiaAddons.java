@@ -73,7 +73,6 @@ public class TektopiaAddons {
 	@Mod.EventHandler
 	public void preinit(FMLPreInitializationEvent preinit) {
 		ConfigHandler.registerConfig(preinit);
-		OreDictionary.registerOre("cropBeetroot",Items.BEETROOT);
 	}
 
 	@Mod.EventHandler
