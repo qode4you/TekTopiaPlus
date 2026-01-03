@@ -60,14 +60,18 @@ public abstract class OreDictScanner {
         while(true) {
             if (!this.scannedBlocks.isEmpty()) {
                 BlockPos bp = this.scannedBlocks.poll();
-                int[] oreIds = OreDictionary.getOreIDs(new ItemStack(this.village.getWorld().getBlockState(bp).getBlock()));
-                int oreId = OreDictionary.getOreID(this.scanOreDict);
                 boolean found = false;
-                for (int id : oreIds) {
-                    if (id == oreId) {
-                        found = true;
-                        break;
+                try {
+                    int[] oreIds = OreDictionary.getOreIDs(new ItemStack(this.village.getWorld().getBlockState(bp).getBlock()));
+                    int oreId = OreDictionary.getOreID(this.scanOreDict);
+                    for (int id : oreIds) {
+                        if (id == oreId) {
+                            found = true;
+                            break;
+                        }
                     }
+                } catch (IllegalArgumentException e) {
+                    continue;
                 }
                 if (!found) {
                     continue;

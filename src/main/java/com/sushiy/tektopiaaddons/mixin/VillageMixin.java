@@ -2,6 +2,8 @@ package com.sushiy.tektopiaaddons.mixin;
 
 import com.sushiy.tektopiaaddons.IOreFinderVillage;
 import com.sushiy.tektopiaaddons.oredictfinder.OreDictFinder;
+import com.sushiy.tektopiaaddons.oredictfinder.SaplingOreScanner;
+import com.sushiy.tektopiaaddons.oredictfinder.SugarCaneOreScanner;
 import com.sushiy.tektopiaaddons.oredictfinder.TreeOreScanner;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,6 +32,8 @@ public abstract class VillageMixin implements IOreFinderVillage {
         this.oreDictFinder = new OreDictFinder();
 
         this.oreDictFinder.registerOreScanner(new TreeOreScanner(self, 30));
+        this.oreDictFinder.registerOreScanner(new SugarCaneOreScanner(self, 15));
+        this.oreDictFinder.registerOreScanner(new SaplingOreScanner(self, 15));
     }
 
     @Redirect(
@@ -41,7 +45,6 @@ public abstract class VillageMixin implements IOreFinderVillage {
             remap = false
     )
     private void replaceBlockFinderUpdate(BlockFinder originalBlockFinder) {
-        System.out.println("[MIXIN DEBUG] BlockFinder redirected successfully!");
         this.oreDictFinder.update();
     }
 

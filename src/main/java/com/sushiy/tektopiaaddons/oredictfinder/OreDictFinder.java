@@ -45,7 +45,7 @@ public class OreDictFinder {
         this.scanners.forEach((k, v) -> v.update());
     }
 
-//    private void debugOut() {
-//        this.scanners.forEach((k, v) -> System.out.println("    Block Finder: [" + k.getLocalizedName() + "]  " + v.getBlockCount()));
-//    }
+    private void debugOut() {
+        this.scanners.forEach((k, v) -> System.out.println("    OreDict Finder: [" + k + "]  " + v.getBlockCount()));
+    }
 }
