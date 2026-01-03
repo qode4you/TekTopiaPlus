@@ -1,6 +1,8 @@
 package com.sushiy.tektopiaaddons.mixin;
 
+import com.sushiy.tektopiaaddons.OreDictStack;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import net.tangotek.tektopia.entities.EntityVillagerTek;
 import net.tangotek.tektopia.entities.crafting.Recipe;
 import net.tangotek.tektopia.storage.ItemDesire;
@@ -38,6 +40,26 @@ public abstract class ItemDesireSetMixin {
                 }
 
                 this.addItemDesire(new ItemDesire(need.getItem().getTranslationKey(), pred, need.getCount(), need.getCount() * r.idealCount, need.getCount() * r.limitCount, shouldNeed));
+            }
+            else if (needObj instanceof OreDictStack) {
+                OreDictStack need = (OreDictStack) needObj;
+                String oreName = need.getOreName();
+                int oreID = OreDictionary.getOreID(oreName);
+                Predicate<ItemStack> pred = p -> {
+                    if (p.isEmpty() || p.isItemEnchanted()) return false;
+
+                    for (int id : OreDictionary.getOreIDs(p)) {
+                        if (id == oreID) return true;
+                    }
+                    return false;
+                };
+
+                Predicate<EntityVillagerTek> shouldNeed = p -> p.isAIFilterEnabled(r.getAiFilter());
+                if (r.shouldCraft != null) {
+                    shouldNeed = shouldNeed.and(r.shouldCraft);
+                }
+
+                this.addItemDesire(new ItemDesire(oreName, pred, need.getCount(), need.getCount() * r.idealCount, need.getCount() * r.limitCount, shouldNeed));
             }
         }
 
