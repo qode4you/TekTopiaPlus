@@ -36,8 +36,13 @@ public class SugarCaneOreScanner extends OreDictScanner {
     }
 
     public void scanNearby(BlockPos bp) {
-        for(BlockPos scanPos : BlockPos.getAllInBox(bp.getX() - 2, bp.getY(), bp.getZ() - 2, bp.getX() + 2, bp.getY(), bp.getZ() + 2)) {
-            this.scanBlock(scanPos);
+        for(int dx = -2; dx <= 2; dx++) {
+            for(int dz = -2; dz <= 2; dz++) {
+                if (dx != 0 || dz != 0) {
+                    BlockPos scanPos = bp.add(dx, 0, dz);
+                    this.scanBlock(scanPos);
+                }
+            }
         }
 
     }

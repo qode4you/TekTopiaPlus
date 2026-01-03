@@ -20,8 +20,15 @@ public class TreeOreScanner extends OreDictScanner {
     }
 
     public void scanNearby(BlockPos bp) {
-        for(BlockPos scanPos : BlockPos.getAllInBox(bp.getX() - 7, bp.getY() + 2, bp.getZ() - 7, bp.getX() + 7, bp.getY() + 2, bp.getZ() + 7)) {
-            this.scanBlock(scanPos);
+        for(int dy = 2; dy <= 10; dy += 2) {
+            for(int dx = -9; dx <= 9; dx += 3) {
+                for(int dz = -9; dz <= 9; dz += 3) {
+                    if (dx != 0 || dz != 0) {
+                        BlockPos scanPos = bp.add(dx, dy, dz);
+                        this.scanBlock(scanPos);
+                    }
+                }
+            }
         }
 
     }

@@ -17,8 +17,15 @@ public class SaplingOreScanner extends OreDictScanner {
     }
 
     public void scanNearby(BlockPos bp) {
-        for(BlockPos scanPos : BlockPos.getAllInBox(bp.getX() - 7, bp.getY() - 2, bp.getZ() - 7, bp.getX() + 7, bp.getY() + 2, bp.getZ() + 7)) {
-            this.scanBlock(scanPos);
+        for(int dy = -2; dy <= 2; dy++) {
+            for(int dx = -7; dx <= 7; dx++) {
+                for(int dz = -7; dz <= 7; dz++) {
+                    if (dx != 0 || dz != 0) {
+                        BlockPos scanPos = bp.add(dx, dy, dz);
+                        this.scanBlock(scanPos);
+                    }
+                }
+            }
         }
 
     }
