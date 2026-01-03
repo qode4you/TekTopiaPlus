@@ -8,6 +8,10 @@ import net.minecraft.world.World;
 import net.tangotek.tektopia.Village;
 
 import javax.annotation.Nullable;
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.Queue;
+import java.util.Set;
 
 public class TreeOreScanner extends OreDictScanner {
     public TreeOreScanner(Village v, int scansPerTick) {
@@ -35,34 +39,37 @@ public class TreeOreScanner extends OreDictScanner {
 
     @Nullable
     protected BlockPos findTreeFromLeaf(World world, BlockPos leafPos) {
-        for(BlockPos bp : BlockPos.getAllInBox(leafPos.getX() - 2, leafPos.getY() - 1, leafPos.getZ() - 2, leafPos.getX() + 2, leafPos.getY() - 1, leafPos.getZ() + 2)) {
-            BlockPos treePos = treeTest(world, bp);
-            if (treePos != null) {
-                return treePos;
-            }
-        }
-
-        return null;
+        return treeTest(world, leafPos.down());
     }
 
     public static BlockPos treeTest(World world, BlockPos bp) {
-        while(isLog(world.getBlockState(bp))) {
-            bp = bp.down();
-            if (world.getBlockState(bp).getBlock() == Blocks.DIRT) {
-                BlockPos treePos = bp.up();
-                bp = bp.up(3);
-
-                for(int i = 0; i < 9; ++i) {
-                    IBlockState westBlock = world.getBlockState(bp.west());
-                    IBlockState eastBlock = world.getBlockState(bp.east());
-                    if ((isLeaf(westBlock) || isLog(westBlock)) && (isLeaf(eastBlock) || isLog(eastBlock))) {
-                        return treePos;
-                    }
-
-                    bp = bp.up();
+        Set<BlockPos> visited = new HashSet<>();
+        Queue<BlockPos> queue = new ArrayDeque<>();
+        queue.add(bp);
+        boolean found = false;
+        while (!queue.isEmpty()) {
+            BlockPos current = queue.poll();
+            visited.add(current);
+            if (!isLog(world.getBlockState(current))) {
+                if (found && world.getBlockState(current).getBlock() == Blocks.DIRT) {
+                    return current.up();
                 }
-
-                return null;
+                for (int dx = -1; dx <= 1; dx++) {
+                    for (int dz = -1; dz <= 1; dz++) {
+                        if (dx != 0 || dz != 0) {
+                            BlockPos testPos = current.add(dx, 0, dz);
+                            if (!visited.contains(testPos) && isLog(world.getBlockState(testPos))) {
+                                queue.add(testPos.down());
+                                visited.add(testPos);
+                                found = true;
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                queue.add(current.down());
+                found = true;
             }
         }
 
