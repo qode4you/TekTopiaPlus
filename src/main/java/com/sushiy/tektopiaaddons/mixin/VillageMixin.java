@@ -49,19 +49,19 @@ public abstract class VillageMixin implements IOreFinderVillage {
     }
 
     @Unique
-    public boolean hasOreDict(String oreDict) {
-        return this.oreDictFinder != null && this.oreDictFinder.hasOreDict(oreDict);
+    public boolean hasOreDict(String oreName) {
+        return this.oreDictFinder != null && this.oreDictFinder.hasOreDict(oreName);
     }
 
     @Unique
-    public BlockPos requestOreDict(String oreDict) {
-        return this.oreDictFinder != null ? this.oreDictFinder.requestOreDict(oreDict) : null;
+    public BlockPos requestOreDict(String oreName) {
+        return this.oreDictFinder != null ? this.oreDictFinder.requestOreDict(oreName) : null;
     }
 
     @Unique
-    public void releaseOreDictClaim(String oreDict, BlockPos pos) {
+    public void releaseOreDictClaim(String oreName, BlockPos pos) {
         if (this.oreDictFinder != null) {
-            this.oreDictFinder.releaseClaim(this.world, oreDict, pos);
+            this.oreDictFinder.releaseClaim(this.world, oreName, pos);
         }
     }
 }
