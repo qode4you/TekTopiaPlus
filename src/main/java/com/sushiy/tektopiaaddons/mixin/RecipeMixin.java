@@ -1,6 +1,8 @@
 package com.sushiy.tektopiaaddons.mixin;
 
+import com.sushiy.tektopiaaddons.OreDictStack;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import net.tangotek.tektopia.ItemTagType;
 import net.tangotek.tektopia.ModItems;
 import net.tangotek.tektopia.ProfessionType;
@@ -42,6 +44,23 @@ public abstract class RecipeMixin {
                     return false;
                 }
             }
+            else if (needObj instanceof OreDictStack) {
+                OreDictStack oreDictReq = (OreDictStack) needObj;
+                String oreName = oreDictReq.getOreName();
+                int oreID = OreDictionary.getOreID(oreName);
+                int reqCount = villager.getInventory().getItemCount(
+                        (Predicate<ItemStack>)p -> {
+                            if (p.isEmpty() || p.isItemEnchanted()) return false;
+
+                            for (int id : OreDictionary.getOreIDs(p)) {
+                                if (id == oreID) return true;
+                            }
+                            return false;
+                        });
+                if (reqCount < oreDictReq.getCount()) {
+                    return false;
+                }
+            }
         }
 
         return true;
@@ -62,6 +81,26 @@ public abstract class RecipeMixin {
                         (Predicate<ItemStack>)p -> p.getItem() == itemReq.getItem(), itemReq.getCount());
                 int total = VillagerInventory.countItems(items);
                 if (total != itemReq.getCount()) {
+                    return null;
+                }
+
+                nonVillagerItems |= items.stream().anyMatch((itemStack) -> !ModItems.isTaggedItem(itemStack, ItemTagType.VILLAGER));
+            }
+            else if (needObj instanceof OreDictStack) {
+                OreDictStack oreDictReq = (OreDictStack) needObj;
+                String oreName = oreDictReq.getOreName();
+                int oreID = OreDictionary.getOreID(oreName);
+                List<ItemStack> items = villager.getInventory().removeItems(
+                        (Predicate<ItemStack>)p -> {
+                            if (p.isEmpty()) return false;
+
+                            for (int id : OreDictionary.getOreIDs(p)) {
+                                if (id == oreID) return true;
+                            }
+                            return false;
+                        }, oreDictReq.getCount());
+                int total = VillagerInventory.countItems(items);
+                if (total != oreDictReq.getCount()) {
                     return null;
                 }
 
@@ -91,6 +130,16 @@ public abstract class RecipeMixin {
                     ItemStack need = (ItemStack) needObj;
                     if (need.getItem() == p.getItem()) {
                         return true;
+                    }
+                }
+                else if (needObj instanceof OreDictStack) {
+                    OreDictStack need = (OreDictStack) needObj;
+                    String oreName = need.getOreName();
+                    int oreID = OreDictionary.getOreID(oreName);
+                    for (int id : OreDictionary.getOreIDs(p)) {
+                        if (id == oreID) {
+                            return true;
+                        }
                     }
                 }
             }
