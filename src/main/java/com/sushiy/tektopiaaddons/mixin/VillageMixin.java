@@ -1,5 +1,6 @@
 package com.sushiy.tektopiaaddons.mixin;
 
+import com.sushiy.tektopiaaddons.IOreFinderVillage;
 import com.sushiy.tektopiaaddons.oredictfinder.OreDictFinder;
 import com.sushiy.tektopiaaddons.oredictfinder.TreeOreScanner;
 import net.minecraft.util.math.BlockPos;
@@ -15,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = Village.class)
-public abstract class VillageMixin {
+public abstract class VillageMixin implements IOreFinderVillage {
     @Shadow(remap = false)
     private World world;
 
