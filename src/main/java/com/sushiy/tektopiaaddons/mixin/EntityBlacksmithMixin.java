@@ -132,7 +132,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("gemDiamond", 2));
         ingredients.add(new OreDictStack("logWood"));
-        System.out.println("buildCraftSetAnvil called - diamondSword is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -150,7 +149,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
     private static List<ItemStack> diamondBootsIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("gemDiamond", 4));
-        System.out.println("buildCraftSetAnvil called - diamondBoots is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -168,7 +166,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
     private static List<ItemStack> diamondChestplateIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("gemDiamond", 8));
-        System.out.println("buildCraftSetAnvil called - diamondChestplate is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -186,7 +183,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
     private static List<ItemStack> diamondLeggingsIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("gemDiamond", 7));
-        System.out.println("buildCraftSetAnvil called - diamondLeggings is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -204,7 +200,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
     private static List<ItemStack> diamondHelmetIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("gemDiamond", 5));
-        System.out.println("buildCraftSetAnvil called - diamondHelmet is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -223,7 +218,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("gemDiamond", 3));
         ingredients.add(new OreDictStack("logWood"));
-        System.out.println("buildCraftSetAnvil called - diamondAxe is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -242,7 +236,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("gemDiamond", 3));
         ingredients.add(new OreDictStack("logWood"));
-        System.out.println("buildCraftSetAnvil called - diamondPickaxe is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -261,7 +254,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("ingotIron", 3));
         ingredients.add(new OreDictStack("logWood"));
-        System.out.println("buildCraftSetAnvil called - ironAxe is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -280,7 +272,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("ingotIron", 3));
         ingredients.add(new OreDictStack("logWood"));
-        System.out.println("buildCraftSetAnvil called - ironPickaxe is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -299,7 +290,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("ingotIron", 2));
         ingredients.add(new OreDictStack("logWood"));
-        System.out.println("buildCraftSetAnvil called - ironSword is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -318,7 +308,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("ingotIron", 2));
         ingredients.add(new OreDictStack("logWood"));
-        System.out.println("buildCraftSetAnvil called - ironHoe is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -336,7 +325,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
     private static List<ItemStack> bucketIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("ingotIron", 3));
-        System.out.println("buildCraftSetAnvil called - bucket is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -354,7 +342,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
     private static List<ItemStack> shearsIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("ingotIron", 2));
-        System.out.println("buildCraftSetAnvil called - shears is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -372,7 +359,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
     private static List<ItemStack> ironBootsIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("ingotIron", 4));
-        System.out.println("buildCraftSetAnvil called - ironBoots is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -390,7 +376,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
     private static List<ItemStack> ironChestplateIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("ingotIron", 8));
-        System.out.println("buildCraftSetAnvil called - ironChestplate is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -408,7 +393,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
     private static List<ItemStack> ironLeggingsIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("ingotIron", 7));
-        System.out.println("buildCraftSetAnvil called - ironLeggings is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
@@ -426,7 +410,6 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
     private static List<ItemStack> ironHelmetIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("ingotIron", 5));
-        System.out.println("buildCraftSetAnvil called - ironHelmet is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }

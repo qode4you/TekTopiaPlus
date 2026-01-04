@@ -361,7 +361,6 @@ public abstract class EntityGuardMixin extends EntityVillagerTek
     private static List<ItemStack> woodenSwordIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("logWood"));
-        System.out.println("buildCraftSet called - woodenSword is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }

@@ -154,7 +154,6 @@ public abstract class EntityMinerMixin extends EntityVillagerTek {
     private static List<ItemStack> woodenPickaxeIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("logWood"));
-        System.out.println("buildCraftSet called - woodenPickaxe is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }

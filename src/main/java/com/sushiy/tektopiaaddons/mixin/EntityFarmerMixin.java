@@ -143,7 +143,6 @@ public abstract class EntityFarmerMixin extends EntityVillagerTek {
     private static List<ItemStack> woodenHoeIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("logWood"));
-        System.out.println("buildCraftSet called - woodenHoe is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }

@@ -57,7 +57,6 @@ public abstract class EntityLumberjackMixin extends EntityVillagerTek {
     private static List<ItemStack> woodenAxeIngredientsModify(List<ItemStack> original) {
         List<Object> ingredients = new ArrayList<>();
         ingredients.add(new OreDictStack("logWood"));
-        System.out.println("buildCraftSet called - woodenAxe is done!");
 
         return (List<ItemStack>)(List<?>) ingredients;
     }
