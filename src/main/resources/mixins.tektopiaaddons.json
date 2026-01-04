@@ -19,6 +19,7 @@
     "EntityMinerMixin",
     "EntityVillagerTekMixin",
     "ItemDesireSetMixin",
+    "ItemValueMixin",
     "ModEntititiesMixin",
     "RecipeMixin",
     "TekVillagerMixin",
