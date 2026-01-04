@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 @Mixin(value = EntityMiner.class)
@@ -156,5 +157,63 @@ public abstract class EntityMinerMixin extends EntityVillagerTek {
         ingredients.add(new OreDictStack("logWood"));
 
         return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSet",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;ILjava/util/function/Predicate;)V",
+                    ordinal = 0
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> charcoalTorchIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("logWood"));
+        ingredients.add(new ItemStack(Items.COAL, 8));
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSet",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;ILjava/util/function/Predicate;)V",
+                    ordinal = 1
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> coalTorchIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("logWood"));
+        ingredients.add(new ItemStack(Items.COAL, 8, 1));
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "initEntityAI",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/ai/EntityAISmelting;<init>(Lnet/tangotek/tektopia/entities/EntityVillagerTek;[Lnet/tangotek/tektopia/structures/VillageStructureType;Ljava/util/function/Predicate;Ljava/util/function/Function;Ljava/lang/Runnable;)V",
+                    ordinal = 0
+            ),
+            index = 3,
+            remap = false
+    )
+    private static Function<ItemStack, Integer> bestSmeltableModify(Function<ItemStack, Integer> original) {
+        int oreID = OreDictionary.getOreID("logWood");
+        return p -> {
+            if (p.isEmpty()) return 0;
+
+            for (int id : OreDictionary.getOreIDs(p)) {
+                if (id == oreID) return 1;
+            }
+            return 0;
+        };
     }
 }

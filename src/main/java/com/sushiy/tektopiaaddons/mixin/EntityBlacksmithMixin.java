@@ -11,6 +11,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 import net.tangotek.tektopia.ProfessionType;
 import net.tangotek.tektopia.entities.EntityBlacksmith;
 import net.tangotek.tektopia.entities.EntityVillagerTek;
@@ -412,5 +413,45 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
         ingredients.add(new OreDictStack("ingotIron", 5));
 
         return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetBench",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 0
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> torchIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("logWood"));
+        ingredients.add(new ItemStack(Items.COAL, 8));
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "initEntityAI",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/ai/EntityAISmelting;<init>(Lnet/tangotek/tektopia/entities/EntityVillagerTek;[Lnet/tangotek/tektopia/structures/VillageStructureType;Ljava/util/function/Predicate;Ljava/util/function/Function;Ljava/lang/Runnable;)V",
+                    ordinal = 1
+            ),
+            index = 3,
+            remap = false
+    )
+    private static Function<ItemStack, Integer> bestSmeltableModify(Function<ItemStack, Integer> original) {
+        int oreID = OreDictionary.getOreID("logWood");
+        return p -> {
+            if (p.isEmpty()) return 0;
+
+            for (int id : OreDictionary.getOreIDs(p)) {
+                if (id == oreID) return 1;
+            }
+            return 0;
+        };
     }
 }

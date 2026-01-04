@@ -12,6 +12,8 @@
     "EntityAIMiningMixin",
     "EntityAiPlantFarmMixin",
     "EntityBlacksmithMixin",
+    "EntityButcherMixin",
+    "EntityChefMixin",
     "EntityFarmerMixin",
     "EntityGuardMixin",
     "EntityLumberjackMixin",
