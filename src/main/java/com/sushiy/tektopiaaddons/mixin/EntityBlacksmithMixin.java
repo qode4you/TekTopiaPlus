@@ -1,5 +1,6 @@
 package com.sushiy.tektopiaaddons.mixin;
 
+import com.sushiy.tektopiaaddons.OreDictStack;
 import com.sushiy.tektopiaaddons.TektopiaAddons;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -18,9 +19,11 @@ import net.tangotek.tektopia.storage.ItemDesire;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -113,5 +116,318 @@ public abstract class EntityBlacksmithMixin extends EntityVillagerTek{
     @Overwrite(remap = false)
     protected Predicate<ItemStack> isDeliverable() {
         return (p) -> craftSetAnvil.stream().anyMatch((e) -> ItemStack.areItemsEqual(e.getProduct(), p) || TektopiaAddons.ingotItems.contains(p.getItem()));
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 0
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> diamondSwordIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("gemDiamond", 2));
+        ingredients.add(new OreDictStack("logWood"));
+        System.out.println("buildCraftSetAnvil called - diamondSword is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 1
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> diamondBootsIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("gemDiamond", 4));
+        System.out.println("buildCraftSetAnvil called - diamondBoots is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 2
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> diamondChestplateIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("gemDiamond", 8));
+        System.out.println("buildCraftSetAnvil called - diamondChestplate is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 3
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> diamondLeggingsIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("gemDiamond", 7));
+        System.out.println("buildCraftSetAnvil called - diamondLeggings is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 4
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> diamondHelmetIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("gemDiamond", 5));
+        System.out.println("buildCraftSetAnvil called - diamondHelmet is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 5
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> diamondAxeIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("gemDiamond", 3));
+        ingredients.add(new OreDictStack("logWood"));
+        System.out.println("buildCraftSetAnvil called - diamondAxe is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 6
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> diamondPickaxeIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("gemDiamond", 3));
+        ingredients.add(new OreDictStack("logWood"));
+        System.out.println("buildCraftSetAnvil called - diamondPickaxe is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 7
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> ironAxeIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("ingotIron", 3));
+        ingredients.add(new OreDictStack("logWood"));
+        System.out.println("buildCraftSetAnvil called - ironAxe is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 8
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> ironPickaxeIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("ingotIron", 3));
+        ingredients.add(new OreDictStack("logWood"));
+        System.out.println("buildCraftSetAnvil called - ironPickaxe is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 9
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> ironSwordIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("ingotIron", 2));
+        ingredients.add(new OreDictStack("logWood"));
+        System.out.println("buildCraftSetAnvil called - ironSword is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 10
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> ironHoeIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("ingotIron", 2));
+        ingredients.add(new OreDictStack("logWood"));
+        System.out.println("buildCraftSetAnvil called - ironHoe is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 11
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> bucketIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("ingotIron", 3));
+        System.out.println("buildCraftSetAnvil called - bucket is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 12
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> shearsIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("ingotIron", 2));
+        System.out.println("buildCraftSetAnvil called - shears is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 13
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> ironBootsIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("ingotIron", 4));
+        System.out.println("buildCraftSetAnvil called - ironBoots is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 14
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> ironChestplateIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("ingotIron", 8));
+        System.out.println("buildCraftSetAnvil called - ironChestplate is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 15
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> ironLeggingsIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("ingotIron", 7));
+        System.out.println("buildCraftSetAnvil called - ironLeggings is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
+    }
+
+    @ModifyArg(
+            method = "buildCraftSetAnvil",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/tangotek/tektopia/entities/crafting/Recipe;<init>(Lnet/tangotek/tektopia/ProfessionType;Ljava/lang/String;ILnet/minecraft/item/ItemStack;Ljava/util/List;IILjava/util/function/Function;I)V",
+                    ordinal = 16
+            ),
+            index = 4,
+            remap = false
+    )
+    private static List<ItemStack> ironHelmetIngredientsModify(List<ItemStack> original) {
+        List<Object> ingredients = new ArrayList<>();
+        ingredients.add(new OreDictStack("ingotIron", 5));
+        System.out.println("buildCraftSetAnvil called - ironHelmet is done!");
+
+        return (List<ItemStack>)(List<?>) ingredients;
     }
 }
