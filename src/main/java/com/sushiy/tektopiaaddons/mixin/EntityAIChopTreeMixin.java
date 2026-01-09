@@ -160,7 +160,7 @@ public abstract class EntityAIChopTreeMixin extends EntityAIMoveToBlock {
                         BlockPos neighbor = above.add(dir);
                         if (!visited.contains(neighbor)) {
                             visited.add(neighbor);
-                            if ((confirmed.contains(neighbor) || this.villager.world.getBlockState(neighbor).getBlock() == originalLog) && this.villager.world.getBlockState(neighbor.down()).getBlock() != originalLog && confirmLogLine(neighbor, originalLog, visited, confirmed)) {
+                            if ((confirmed.contains(neighbor) || this.villager.world.getBlockState(neighbor).getBlock() == originalLog) && !confirmed.contains(neighbor.down()) && this.villager.world.getBlockState(neighbor.down()).getBlock() != originalLog && confirmLogLine(neighbor, originalLog, visited, confirmed)) {
                                 currentLayerQueue.add(neighbor);
                                 confirmed.add(neighbor);
                                 nextLayerLogs.add(neighbor);
@@ -178,7 +178,7 @@ public abstract class EntityAIChopTreeMixin extends EntityAIMoveToBlock {
                     BlockPos neighbor = current.add(dir);
                     if (!visited.contains(neighbor)) {
                         visited.add(neighbor);
-                        if ((confirmed.contains(neighbor) || this.villager.world.getBlockState(neighbor).getBlock() == originalLog) && confirmLogLine(neighbor, originalLog, visited, confirmed)) {
+                        if ((confirmed.contains(neighbor) || this.villager.world.getBlockState(neighbor).getBlock() == originalLog) && !confirmed.contains(neighbor.down()) && this.villager.world.getBlockState(neighbor.down()).getBlock() != originalLog && confirmLogLine(neighbor, originalLog, visited, confirmed)) {
                             currentLayerQueue.add(neighbor);
                             confirmed.add(neighbor);
                             currentLayerLogs.add(neighbor);
