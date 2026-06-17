@@ -26,7 +26,12 @@ public class ConfigHandler {
     public static int VILLAGE_RADIUS = 100;
     public static int VILLAGE_ANIMALPEN_SIZE_PERCENTAGE_MULTIPLIER = 100;
     public static boolean NEW_PLAYERS_RECEIVE_STARTERBOOK = false;
-  
+
+    // PR #8: Challenging village start
+    public static boolean CHALLENGING_VILLAGE_START_ENABLED = false;
+    public static boolean BASIC_PROFESSION_TOKEN_CRAFTING = false;
+
+    // PR #12: Village hardcore mode and stone support
     public static boolean VILLAGE_HARDCORE_MODE_ENABLED = false;
     public static boolean VILLAGER_STONE_SUPPORT_ENABLE = false;
 
@@ -44,7 +49,12 @@ public class ConfigHandler {
         //VILLAGE_RADIUS = config.getInt("Radius of village ", category, 100, 0, 300, "!!Change with caution!!.default 100");
         VILLAGE_ANIMALPEN_SIZE_PERCENTAGE_MULTIPLIER = Math.round(config.getFloat("Multiplier for animals in a pen", category, 1, 0, 10, "default 1")* 100);
         NEW_PLAYERS_RECEIVE_STARTERBOOK = config.getBoolean("Should new players get a starterbook", category, false, "");
-      
+
+        // PR #8: Challenging village start configs
+        CHALLENGING_VILLAGE_START_ENABLED = config.getBoolean("Enable challenging village start", category, false, "Reduces initial village size when enabled");
+        BASIC_PROFESSION_TOKEN_CRAFTING = config.getBoolean("Allow crafting for basic profession tokens", category, false, "Enables crafting recipes for Farmer, Lumberjack, Miner, and Guard tokens");
+
+        // PR #12: Village hardcore mode and stone support
         VILLAGE_HARDCORE_MODE_ENABLED = config.getBoolean("Enable Village Hardcore Mode", category, false, "More types of monsters will attack villagers");
         VILLAGER_STONE_SUPPORT_ENABLE = config.getBoolean("Enable villager stone support", category, false, "Allow villagers to obtain and use stone resources and tools");
 
